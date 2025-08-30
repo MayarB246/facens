@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Exemplo Didático - Aula 03</title>
+    <!-- Importa o CSS-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cabeçalho da página -->
+    <header>
+        <h1>Título principal (H1) – centralizado</h1>
+        <h2>Subtítulo (H2) – alinhado à esquerda</h2>
+        <h3>Seção (H3) – alinhado à direita</h3>
+        <h4>Subseção (H4)</h4>
+        <h5>Detalhe (H5)</h5>
+        <h6>Nota (H6)</h6>
+    </header>
+
+    <!-- Menu de navegação -->
+    <nav>
+        <p>
+            <a href="#posts">Posts</a> | 
+            <a href="#lateral">Lateral</a> | 
+            <a href="#rodape">Rodapé</a>
+        </p>
+    </nav>
+
+    <!-- Seção de posts -->
+    <section id="posts">
+        <article class="post">
+            <header>
+                <h2>Meu Blog – Primeiro Post</h2>
+            </header>
+
+            <!-- Parágrafo com formatações -->
+            <p>
+                Este é um parágrafo com 
+                <strong>negrito</strong>, 
+                <em>itálico</em>, 
+                <span class="underline">sublinhado</span>, 
+                <span class="line-through">riscado</span>, 
+                além de exemplos de 
+                <sub>subscrito</sub> e 
+                <sup>sobrescrito</sup>.
+            </p>
+
+            <!-- Texto estilizado -->
+            <p>
+                Exemplo de <span class="estilizado"> texto estilizado</span> (substituindo a tag &lt;font&gt; obsoleta).
+            </p>
+            
+
+            <!-- Texto centralizado -->
+            <div class="center">Este texto está centralizado (substituindo &lt;center&gt;).</div>
+
+            <!-- Parágrafo justificado com quebra de linha -->
+            <p class="justify">
+                Parágrafo justificado para demonstrar alinhamento.<br>
+                Esta é a linha seguinte após o &lt;br/&gt;.
+            </p>
+        </article>
+    </section>
+
+    <!-- Barra lateral -->
+    <aside id="lateral">
+        <h4>Conteúdo Relacionado</h4>
+        <p>
+            Links, anúncios, ou notas que não fazem parte do fluxo principal do artigo.
+        </p>
+    </aside>
+
+    <!-- Rodapé -->
+    <footer id="rodape">
+        <p>© 2025 – Exemplo didático de HTML da Aula 03</p>
+    </footer>
+</body>
+</html>

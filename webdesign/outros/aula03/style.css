@@ -1,0 +1,44 @@
+/* Estilo para os títulos */
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+
+/* Texto sublinhado */
+.underline {
+    text-decoration: underline;
+}
+
+/* Texto riscado */
+.line-through {
+    text-decoration: line-through;
+}
+
+/* Texto centralizado */
+.center {
+    text-align: center;
+}
+
+/* Parágrafo justificado */
+.justify {
+    text-align: justify;
+}
+
+/* Texto estilizado em azul e maior */
+.estilizado {
+    color: blue;
+    font-size: 18px;
+}
+
+/* Texto centralizado e cinza*/
+footer{
+    text-align: center;
+    color: grey;
+}
