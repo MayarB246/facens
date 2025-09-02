@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prospecção Vuelo - Sistema de Leads</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: linear-gradient(135deg, #f9f9f9 0%, #e6e6e6 100%); color: #333; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-bottom: 30px; border-bottom: 2px solid #9370DB; }
+        .logo { display: flex; align-items: center; }
+        .logo-vuelo { font-size: 36px; font-weight: 800; }
+        .v-amarelo { color: #FFD700; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .resto-roxo { color: #9370DB; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .search-container { display: flex; gap: 10px; }
+        .search-container input { padding: 10px 15px; border: 2px solid #9370DB; border-radius: 30px; width: 250px; font-size: 16px; }
+        .search-container button { background: #9370DB; color: white; border: none; border-radius: 30px; padding: 10px 20px; cursor: pointer; font-weight: 600; transition: background 0.3s; }
+        .search-container button:hover { background: #7B68EE; }
+        .dashboard { display: grid; grid-template-columns: 1fr 3fr; gap: 20px; margin-bottom: 30px; }
+        .filters { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .filters h2 { margin-bottom: 15px; color: #9370DB; font-size: 18px; }
+        .filter-group { margin-bottom: 15px; }
+        .filter-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .filter-group select { width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 5px; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: white; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .stat-card h3 { font-size: 14px; color: #777; margin-bottom: 10px; }
+        .stat-card .number { font-size: 28px; font-weight: 700; color: #9370DB; }
+        .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .chart-container { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .chart-container h2 { margin-bottom: 15px; color: #9370DB; font-size: 18px; text-align: center; }
+        .establishments-list { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); overflow-x: auto; }
+        .establishments-list h2 { margin-bottom: 15px; color: #9370DB; font-size: 18px; }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #9370DB; color: white; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        .status-lead { display: flex; justify-content: center; }
+        .status-btn { border: none; border-radius: 5px; padding: 8px 12px; cursor: pointer; font-size: 14px; transition: all 0.3s; font-weight: 600; width: 100px; text-align: center; }
+        .status-sem { background: #bdc3c7; color: #2c3e50; }
+        .status-frio { background: #3498db; color: white; }
+        .status-morno { background: #f39c12; color: white; }
+        .status-quente { background: #e74c3c; color: white; }
+        .etapas-lead { display: flex; gap: 8px; }
+        .etapa-check { display: flex; flex-direction: column; align-items: center; }
+        .etapa-bolinha { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #9370DB; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; background: white; transition: all 0.3s; }
+        .etapa-bolinha.checked { background: #9370DB; color: white; }
+        .etapa-label { font-size: 10px; margin-top: 4px; text-align: center; max-width: 60px; }
+        .action-btn { background: #9370DB; color: white; border: none; border-radius: 5px; padding: 8px 12px; cursor: pointer; font-size: 14px; transition: background 0.3s; }
+        .action-btn:hover { background: #7B68EE; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background-color: white; padding: 30px; border-radius: 10px; width: 500px; max-width: 90%; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #9370DB; padding-bottom: 10px; }
+        .modal-title { color: #9370DB; font-size: 24px; font-weight: 700; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #777; }
+        .detail-item { margin-bottom: 15px; display: flex; }
+        .detail-label { font-weight: 600; width: 120px; color: #555; }
+        .detail-value { flex: 1; }
+        .observations { margin-top: 20px; }
+        .observations textarea { width: 100%; height: 100px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; resize: vertical; font-family: 'Montserrat', sans-serif; }
+        .save-btn { background: #9370DB; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer; font-weight: 600; margin-top: 15px; width: 100%; transition: background 0.3s; }
+        .save-btn:hover { background: #7B68EE; }
+        footer { text-align: center; padding: 20px; margin-top: 30px; color: #777; border-top: 1px solid #ddd; }
+        .api-section { background: white; border-radius: 10px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .api-section h2 { color: #9370DB; margin-bottom: 15px; }
+        .api-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+        .api-result { margin-top: 20px; max-height: 300px; overflow-y: auto; }
+        @media (max-width: 1100px) {
+            .dashboard { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .charts { grid-template-columns: 1fr; }
+            .api-form { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .stats { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 15px; }
+            .search-container { width: 100%; }
+            .search-container input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-vuelo"><span class="v-amarelo">V</span><span class="resto-roxo">uelo</span></div>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar estabelecimento...">
+                <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </header>
+    
+        
+        <div class="stats">
+            <div class="stat-card"><h3>Total de Leads</h3><div class="number">26</div></div>
+            <div class="stat-card"><h3>Leads Frios</h3><div class="number" id="frios-count">0</div></div>
+            <div class="stat-card"><h3>Leads Mornos</h3><div class="number" id="mornos-count">0</div></div>
+            <div class="stat-card"><h3>Leads Quentes</h3><div class="number" id="quentes-count">0</div></div>
+        </div>
+        
+        <div class="dashboard">
+            <div class="filters">
+                <h2>Filtros</h2>
+                <div class="filter-group">
+                    <label for="typeFilter">Tipo de Estabelecimento</label>
+                    <select id="typeFilter">
+                        <option value="all">Todos</option>
+                        <option value="Açougue">Açougues</option>
+                        <option value="Joalheria">Joalherias</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="neighborhoodFilter">Bairro</label>
+                    <select id="neighborhoodFilter">
+                        <option value="all">Todos</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Vila Garcia">Vila Garcia</option>
+                        <option value="Vila Lopez">Vila Lopez</option>
+                        <option value="Jardim Bela Vista">Jardim Bela Vista</option>
+                        <option value="Jardim Santa Helena">Jardim Santa Helena</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Status do Lead</label>
+                    <select id="statusFilter">
+                        <option value="all">Todos</option>
+                        <option value="frio">Frio</option>
+                        <option value="morno">Morno</option>
+                        <option value="quente">Quente</option>
+                        <option value="sem-status">Sem Status</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="etapaFilter">Filtrar por Etapa</label>
+                    <select id="etapaFilter">
+                        <option value="all">Todas as Etapas</option>
+                        <option value="etapa1">1º Contato</option>
+                        <option value="etapa2">2º Contato</option>
+                        <option value="etapa3">3º Contato</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sortBy">Ordenar por</label>
+                    <select id="sortBy">
+                        <option value="name">Nome (A-Z)</option>
+                        <option value="type">Tipo</option>
+                        <option value="neighborhood">Bairro</option>
+                        <option value="status">Status</option>
+                    </select>
+                </div>
+                <button class="action-btn" style="width: 100%; margin-top: 10px;" id="applyFilters">Aplicar Filtros</button>
+                <button class="action-btn" style="width: 100%; margin-top: 10px; background: #555;" id="resetFilters">Limpar Filtros</button>
+            </div>
+            
+            <div class="charts">
+                <div class="chart-container"><h2>Distribuição por Tipo</h2><canvas id="typeChart"></canvas></div>
+                <div class="chart-container"><h2>Status dos Leads</h2><canvas id="statusChart"></canvas></div>
+            </div>
+        </div>
+        
+        <div class="establishments-list">
+            <h2>Lista de Leads</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">Contatos</th>
+                        <th>Nome</th>
+                        <th style="width: 100px;">Status</th>
+                        <th style="width: 120px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="establishmentsTable"></tbody>
+            </table>
+        </div>
+        
+        <div class="modal" id="detailsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Detalhes do Lead</h2>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Vuelo Analytics - Sistema de Prospecção - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dados dos estabelecimentos
+        let establishments = [
+            { name: "Açougue e Mercado Tapa Buraco", type: "Açougue", phone: "(15) 3353-2091", address: "R. Antônio Rodrigues Alves, 344", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Peixaria São Judas", type: "Açougue", phone: "(15) 3353-2582", address: "R. Santa Cruz, 287", neighborhood: "Vila Lopez", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue Real", type: "Açougue", phone: "(15) 3353-2256", address: "Av. 31 de Março, 701", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Mercearia 3 Irmãos", type: "Açougue", phone: "(15) 3352-1942", address: "R. José Inácio, 230", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Super Açougue e Mercearia D'Luz", type: "Açougue", phone: "(15) 3353-2048", address: "R. Antônio Alves, 352", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Mercearia São Jorge", type: "Açougue", phone: "(15) 3353-2603", address: "R. Antônio Rodrigues Alves, 115", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Mercearia Santa Edwiges", type: "Açougue", phone: "(15) 3353-1503", address: "R. José Inácio, 136", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue Carnes Nobres", type: "Açougue", phone: "(15) 99658-0808", address: "Av. Ambrósio Molina, 769", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Peixaria Recanto", type: "Açougue", phone: "(15) 3343-0033", address: "R. Mário César de Camargo, 51", neighborhood: "Jardim Santa Helena", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Frigorífico Votorantim", type: "Açougue", phone: "(15) 3353-1772", address: "Estr. Mun. Bento dos Santos, 601", neighborhood: "Chácara Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Mercado e Açougue Irmãos Lopes", type: "Açougue", phone: "(15) 3353-1100", address: "R. José Inácio, 155", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Mercearia Ponto Certo", type: "Açougue", phone: "(15) 3343-0104", address: "R. José Inácio, 801", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Super Açougue e Mercearia São Francisco", type: "Açougue", phone: "(15) 3353-1613", address: "R. Antônio Alves, 226", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Mercearia Morada do Sol", type: "Açougue", phone: "(15) 3343-0159", address: "R. José Inácio, 575", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue Planalto", type: "Açougue", phone: "(15) 3353-2296", address: "Av. 31 de Março, 1055", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Açougue e Mercearia Jd. Bela Vista", type: "Açougue", phone: "(15) 3353-2300", address: "Av. Ambrósio Molina, 571", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Joalheria Diniz", type: "Joalheria", phone: "(15) 3353-1555", address: "R. Antônio Rodrigues Alves, 250 - Loja 3", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Ourivesaria e Joalheria Ouro & Estilo", type: "Joalheria", phone: "(15) 3353-3030", address: "Av. 31 de Março, 523", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Joalheria Prata & Cia", type: "Joalheria", phone: "(15) 3353-2188", address: "R. Antônio Rodrigues Alves, 250 - Loja 1", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Joalheria Real", type: "Joalheria", phone: "(15) 3353-4466", address: "R. Antônio Rodrigues Alves, 250 - Loja 2", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Ourivesaria e Joalheria Votorantim", type: "Joalheria", phone: "(15) 3353-1832", address: "R. Antônio Rodrigues Alves, 250 - Loja 5", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Joalheria Ouro Preto", type: "Joalheria", phone: "(15) 3343-0088", address: "Av. Ambrósio Molina, 355 - Lj 1", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Ourivesaria e Joalheria A Nacional", type: "Joalheria", phone: "(15) 3353-1230", address: "R. Antônio Rodrigues Alves, 250 - Loja 4", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Joalheria Jóias & Cia", type: "Joalheria", phone: "(15) 3246-0068", address: "Av. Ambrósio Molina, 355 - Lj 2", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Ourivesaria São João", type: "Joalheria", phone: "(15) 3353-1580", address: "R. Antônio Rodrigues Alves, 250", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
+            { name: "Prata Fina Joalheria", type: "Joalheria", phone: "(15) 98125-9595", address: "Av. Ambrósio Molina, 355 - Lj 3", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" }
+        ];
+
+        // Funções de gerenciamento de dados
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('vueloLeadsData');
+            if (savedData) establishments = JSON.parse(savedData);
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('vueloLeadsData', JSON.stringify(establishments));
+        }
+
+        function updateStatusCounters() {
+            document.getElementById('frios-count').textContent = establishments.filter(e => e.status === 'frio').length;
+            document.getElementById('mornos-count').textContent = establishments.filter(e => e.status === 'morno').length;
+            document.getElementById('quentes-count').textContent = establishments.filter(e => e.status === 'quente').length;
+        }
+
+        // Função para preencher a tabela
+        function populateTable(data) {
+            const tableBody = document.getElementById('establishmentsTable');
+            tableBody.innerHTML = '';
+            
+            data.forEach((establishment, index) => {
+                let statusClass = 'status-sem', statusText = 'Sem Status';
+                if (establishment.status === 'frio') { statusClass = 'status-frio'; statusText = 'Frio'; }
+                else if (establishment.status === 'morno') { statusClass = 'status-morno'; statusText = 'Morno'; }
+                else if (establishment.status === 'quente') { statusClass = 'status-quente'; statusText = 'Quente'; }
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="etapas-lead">
+                            <div class="etapa-check">
+                                <div class="etapa-bolinha ${establishment.etapas.etapa1 ? 'checked' : ''}" onclick="toggleEtapa(${index}, 'etapa1')">${establishment.etapas.etapa1 ? '✓' : ''}</div>
+                                <div class="etapa-label">1º Contato</div>
+                            </div>
+                            <div class="etapa-check">
+                                <div class="etapa-bolinha ${establishment.etapas.etapa2 ? 'checked' : ''}" onclick="toggleEtapa(${index}, 'etapa2')">${establishment.etapas.etapa2 ? '✓' : ''}</div>
+                                <div class="etapa-label">2º Contato</div>
+                            </div>
+                            <div class="etapa-check">
+                                <div class="etapa-bolinha ${establishment.etapas.etapa3 ? 'checked' : ''}" onclick="toggleEtapa(${index}, 'etapa3')">${establishment.etapas.etapa3 ? '✓' : ''}</div>
+                                <div class="etapa-label">3º Contato</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${establishment.name}</td>
+                    <td><div class="status-lead"><button class="status-btn ${statusClass}" onclick="cycleLeadStatus(${index})">${statusText}</button></div></td>
+                    <td><button class="action-btn" onclick="showDetails(${index})"><i class="fas fa-info-circle"></i> Detalhes</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            updateStatusCounters();
+        }
+
+        // Funções de interação
+        function cycleLeadStatus(index) {
+            const statusOrder = ['', 'frio', 'morno', 'quente'];
+            const currentStatus = establishments[index].status;
+            const nextIndex = (statusOrder.indexOf(currentStatus) + 1) % statusOrder.length;
+            establishments[index].status = statusOrder[nextIndex];
+            saveToLocalStorage();
+            populateTable(establishments);
+            initCharts();
+        }
+
+        function toggleEtapa(index, etapa) {
+            establishments[index].etapas[etapa] = !establishments[index].etapas[etapa];
+            saveToLocalStorage();
+            populateTable(establishments);
+        }
+
+        function showDetails(index) {
+            const establishment = establishments[index];
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-item"><span class="detail-label">Nome:</span><span class="detail-value">${establishment.name}</span></div>
+                <div class="detail-item"><span class="detail-label">Tipo:</span><span class="detail-value">${establishment.type}</span></div>
+                <div class="detail-item"><span class="detail-label">Telefone:</span><span class="detail-value">${establishment.phone}</span></div>
+                <div class="detail-item"><span class="detail-label">Endereço:</span><span class="detail-value">${establishment.address}</span></div>
+                <div class="detail-item"><span class="detail-label">Bairro:</span><span class="detail-value">${establishment.neighborhood}</span></div>
+                <div class="detail-item"><span class="detail-label">Status:</span><span class="detail-value">${establishment.status ? establishment.status.charAt(0).toUpperCase() + establishment.status.slice(1) : 'Sem status'}</span></div>
+                <div class="observations">
+                    <div class="detail-label">Observações:</div>
+                    <textarea id="observationsText" placeholder="Adicione observações sobre este lead...">${establishment.observacoes || ''}</textarea>
+                </div>
+                <button class="save-btn" onclick="saveObservations(${index})">Salvar Observações</button>
+            `;
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+
+        function saveObservations(index) {
+            establishments[index].observacoes = document.getElementById('observationsText').value;
+            saveToLocalStorage();
+            alert('Observações salvas com sucesso!');
+            closeDetailsModal();
+        }
+
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+
+        // Funções para gráficos
+        function initCharts() {
+            const typeCounts = {
+                'Açougue': establishments.filter(e => e.type === 'Açougue').length,
+                'Joalheria': establishments.filter(e => e.type === 'Joalheria').length
+            };
+            
+            const statusCounts = {
+                'Frio': establishments.filter(e => e.status === 'frio').length,
+                'Morno': establishments.filter(e => e.status === 'morno').length,
+                'Quente': establishments.filter(e => e.status === 'quente').length,
+                'Sem Status': establishments.filter(e => !e.status).length
+            };
+            
+            // Gráfico de tipos
+            const typeCtx = document.getElementById('typeChart').getContext('2d');
+            if (window.typeChartInstance) window.typeChartInstance.destroy();
+            window.typeChartInstance = new Chart(typeCtx, {
+                type: 'pie', data: {
+                    labels: Object.keys(typeCounts),
+                    datasets: [{ data: Object.values(typeCounts), backgroundColor: ['#FFD700', '#9370DB'] }]
+                }, options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+            
+            // Gráfico de status
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            if (window.statusChartInstance) window.statusChartInstance.destroy();
+            window.statusChartInstance = new Chart(statusCtx, {
+                type: 'doughnut', data: {
+                    labels: Object.keys(statusCounts),
+                    datasets: [{ data: Object.values(statusCounts), backgroundColor: ['#3498db', '#f39c12', '#e74c3c', '#95a5a6'] }]
+                }, options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        // Funções de filtro
+        function applyFilters() {
+            const typeValue = document.getElementById('typeFilter').value;
+            const neighborhoodValue = document.getElementById('neighborhoodFilter').value;
+            const statusValue = document.getElementById('statusFilter').value;
+            const etapaValue = document.getElementById('etapaFilter').value;
+            const sortValue = document.getElementById('sortBy').value;
+            
+            let filteredData = establishments;
+            
+            if (typeValue !== 'all') filteredData = filteredData.filter(e => e.type === typeValue);
+            if (neighborhoodValue !== 'all') filteredData = filteredData.filter(e => e.neighborhood === neighborhoodValue);
+            if (statusValue !== 'all') {
+                if (statusValue === 'sem-status') filteredData = filteredData.filter(e => !e.status);
+                else filteredData = filteredData.filter(e => e.status === statusValue);
+            }
+            if (etapaValue !== 'all') filteredData = filteredData.filter(e => e.etapas[etapaValue] === true);
+            
+            if (sortValue === 'name') filteredData.sort((a, b) => a.name.localeCompare(b.name));
+            else if (sortValue === 'type') filteredData.sort((a, b) => a.type.localeCompare(b.type));
+            else if (sortValue === 'neighborhood') filteredData.sort((a, b) => a.neighborhood.localeCompare(b.neighborhood));
+            else if (sortValue === 'status') {
+                const statusOrder = { 'quente': 1, 'morno': 2, 'frio': 3, '': 4 };
+                filteredData.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+            }
+            
+            populateTable(filteredData);
+        }
+
+        function resetFilters() {
+            document.getElementById('typeFilter').value = 'all';
+            document.getElementById('neighborhoodFilter').value = 'all';
+            document.getElementById('statusFilter').value = 'all';
+            document.getElementById('etapaFilter').value = 'all';
+            document.getElementById('sortBy').value = 'name';
+            populateTable(establishments);
+        }
+
+        function searchEstablishments() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm.trim() === '') { applyFilters(); return; }
+            
+            const filteredData = establishments.filter(e => 
+                e.name.toLowerCase().includes(searchTerm) ||
+                e.type.toLowerCase().includes(searchTerm) ||
+                e.neighborhood.toLowerCase().includes(searchTerm) ||
+                e.address.toLowerCase().includes(searchTerm)
+            );
+            
+            populateTable(filteredData);
+        }
+
+        // Função para integração com API do Moskit
+        async function fetchMoskitData() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const endpoint = document.getElementById('apiEndpoint').value;
+            const resultDiv = document.getElementById('apiResult');
+            
+            if (!apiKey) {
+                resultDiv.innerHTML = '<div class="error">Por favor, insira sua chave API do Moskit.</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="loading">Carregando dados da API...</div>';
+            
+            try {
+                // Esta é uma simulação - em um caso real, você faria uma requisição para a API do Moskit
+                // Como não podemos fazer requisições diretas do frontend para a API do Moskit (problema de CORS),
+                // você precisaria implementar um backend proxy como mostrado anteriormente
+                
+                // Simulando uma resposta da API
+                setTimeout(() => {
+                    const mockData = [
+                        { id: 1, name: "Lead Exemplo 1", value: 1000, stage: "Negotiation" },
+                        { id: 2, name: "Lead Exemplo 2", value: 2500, stage: "Proposal" },
+                        { id: 3, name: "Lead Exemplo 3", value: 500, stage: "Qualification" }
+                    ];
+                    
+                    resultDiv.innerHTML = `
+                        <div class="success">Dados carregados com sucesso! ${mockData.length} registros encontrados.</div>
+                        <table>
+                            <thead><tr><th>ID</th><th>Nome</th><th>Valor</th><th>Estágio</th></tr></thead>
+                            <tbody>
+                                ${mockData.map(item => `
+                                    <tr>
+                                        <td>${item.id}</td>
+                                        <td>${item.name}</td>
+                                        <td>R$ ${item.value.toLocaleString('pt-BR')}</td>
+                                        <td>${item.stage}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }, 1500);
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">Erro ao buscar dados: ${error.message}</div>`;
+            }
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFromLocalStorage();
+            populateTable(establishments);
+            initCharts();
+            
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            document.getElementById('searchBtn').addEventListener('click', searchEstablishments);
+            document.getElementById('searchInput').addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') searchEstablishments();
+            });
+            
+            document.getElementById('closeModal').addEventListener('click', closeDetailsModal);
+            document.getElementById('fetchApiData').addEventListener('click', fetchMoskitData);
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('detailsModal')) closeDetailsModal();
+            });
+        });
+    </script>
+</body>
+</html>
