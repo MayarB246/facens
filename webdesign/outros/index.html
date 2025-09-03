@@ -7,7 +7,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: linear-gradient(135deg, #f9f9f9 0%, #e6e6e6 100%); color: #333; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-bottom: 30px; border-bottom: 2px solid #9370DB; }
+        .logo { display: flex; align-items: center; }
+        .logo-vuelo { font-size: 36px; font-weight: 800; }
+        .v-amarelo { color: #FFD700; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .resto-roxo { color: #9370DB; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .search-container { display: flex; gap: 10px; }
+        .search-container input { padding: 10px 15px; border: 2px solid #9370DB; border-radius: 30px; width: 250px; font-size: 16px; }
+        .search-container button { background: #9370DB; color: white; border: none; border-radius: 30px; padding: 10px 20px; cursor: pointer; font-weight: 600; transition: background 0.3s; }
+        .search-container button:hover { background: #7B68EE; }
+        .dashboard { display: grid; grid-template-columns: 1fr 3fr; gap: 20px; margin-bottom: 30px; }
+        .filters { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .filters h2 { margin-bottom: 15px; color: #9370DB; font-size: 18px; }
+        .filter-group { margin-bottom: 15px; }
+        .filter-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .filter-group select { width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 5px; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: white; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .stat-card h3 { font-size: 14px; color: #777; margin-bottom: 10px; }
+        .stat-card .number { font-size: 28px; font-weight: 700; color: #9370DB; }
+        .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .chart-container { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .chart-container h2 { margin-bottom: 15px; color: #9370DB; font-size: 18px; text-align: center; }
+        .establishments-list { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); overflow-x: auto; }
+        .establishments-list h2 { margin-bottom: 15px; color: #9370DB; font-size: 18px; }
+        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #9370DB; color: white; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        .status-lead { display: flex; justify-content: center; }
+        .status-btn { border: none; border-radius: 5px; padding: 8px 12px; cursor: pointer; font-size: 14px; transition: all 0.3s; font-weight: 600; width: 100px; text-align: center; }
+        .status-sem { background: #bdc3c7; color: #2c3e50; }
+        .status-frio { background: #3498db; color: white; }
+        .status-morno { background: #f39c12; color: white; }
+        .status-quente { background: #e74c3c; color: white; }
+        .etapas-lead { display: flex; gap: 8px; }
+        .etapa-check { display: flex; flex-direction: column; align-items: center; }
+        .etapa-bolinha { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #9370DB; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; background: white; transition: all 0.3s; }
+        .etapa-bolinha.checked { background: #9370DB; color: white; }
+        .etapa-label { font-size: 10px; margin-top: 4px; text-align: center; max-width: 60px; }
+        .action-btn { background: #9370DB; color: white; border: none; border-radius: 5px; padding: 8px 12px; cursor: pointer; font-size: 14px; transition: background 0.3s; }
+        .action-btn:hover { background: #7B68EE; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background-color: white; padding: 30px; border-radius: 10px; width: 500px; max-width: 90%; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #9370DB; padding-bottom: 10px; }
+        .modal-title { color: #9370DB; font-size: 24px; font-weight: 700; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #777; }
+        .detail-item { margin-bottom: 15px; display: flex; }
+        .detail-label { font-weight: 600; width: 120px; color: #555; }
+        .detail-value { flex: 1; }
+        .observations { margin-top: 20px; }
+        .observations textarea { width: 100%; height: 100px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; resize: vertical; font-family: 'Montserrat', sans-serif; }
+        .save-btn { background: #9370DB; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer; font-weight: 600; margin-top: 15px; width: 100%; transition: background 0.3s; }
+        .save-btn:hover { background: #7B68EE; }
+        footer { text-align: center; padding: 20px; margin-top: 30px; color: #777; border-top: 1px solid #ddd; }
+        .api-section { background: white; border-radius: 10px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .api-section h2 { color: #9370DB; margin-bottom: 15px; }
+        .api-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+        .api-result { margin-top: 20px; max-height: 300px; overflow-y: auto; }
+        @media (max-width: 1100px) {
+            .dashboard { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .charts { grid-template-columns: 1fr; }
+            .api-form { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .stats { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 15px; }
+            .search-container { width: 100%; }
+            .search-container input { width: 100%; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -20,9 +95,10 @@
                 <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
             </div>
         </header>
+    
         
         <div class="stats">
-            <div class="stat-card"><h3>Total de Leads</h3><div class="number">26</div></div>
+            <div class="stat-card"><h3>Total de Leads</h3><div class="number" id="total-count">0</div></div>
             <div class="stat-card"><h3>Leads Frios</h3><div class="number" id="frios-count">0</div></div>
             <div class="stat-card"><h3>Leads Mornos</h3><div class="number" id="mornos-count">0</div></div>
             <div class="stat-card"><h3>Leads Quentes</h3><div class="number" id="quentes-count">0</div></div>
@@ -61,7 +137,6 @@
                         <option value="Jardim Simus">Jardim Simus</option>
                         <option value="Chácara Bela Vista">Chácara Bela Vista</option>
                         <option value="Campinho">Campinho</option>
-
                     </select>
                 </div>
                 <div class="filter-group">
@@ -133,139 +208,79 @@
     </div>
 
     <script>
-        // Dados dos estabelecimentos
+        // Dados dos estabelecimentos - incluindo restaurantes
         let establishments = [
+            // Açougues existentes
             { name: "Açougue e Mercado Tapa Buraco", type: "Açougue", phone: "(15) 3353-2091", address: "R. Antônio Rodrigues Alves, 344", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Peixaria São Judas", type: "Açougue", phone: "(15) 3353-2582", address: "R. Santa Cruz, 287", neighborhood: "Vila Lopez", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue Real", type: "Açougue", phone: "(15) 3353-2256", address: "Av. 31 de Março, 701", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Mercearia 3 Irmãos", type: "Açougue", phone: "(15) 3352-1942", address: "R. José Inácio, 230", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Super Açougue e Mercearia D'Luz", type: "Açougue", phone: "(15) 3353-2048", address: "R. Antônio Alves, 352", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Mercearia São Jorge", type: "Açougue", phone: "(15) 3353-2603", address: "R. Antônio Rodrigues Alves, 115", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Mercearia Santa Edwiges", type: "Açougue", phone: "(15) 3353-1503", address: "R. José Inácio, 136", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue Carnes Nobres", type: "Açougue", phone: "(15) 99658-0808", address: "Av. Ambrósio Molina, 769", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Peixaria Recanto", type: "Açougue", phone: "(15) 3343-0033", address: "R. Mário César de Camargo, 51", neighborhood: "Jardim Santa Helena", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Frigorífico Votorantim", type: "Açougue", phone: "(15) 3353-1772", address: "Estr. Mun. Bento dos Santos, 601", neighborhood: "Chácara Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Mercado e Açougue Irmãos Lopes", type: "Açougue", phone: "(15) 3353-1100", address: "R. José Inácio, 155", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Mercearia Ponto Certo", type: "Açougue", phone: "(15) 3343-0104", address: "R. José Inácio, 801", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Super Açougue e Mercearia São Francisco", type: "Açougue", phone: "(15) 3353-1613", address: "R. Antônio Alves, 226", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Mercearia Morada do Sol", type: "Açougue", phone: "(15) 3343-0159", address: "R. José Inácio, 575", neighborhood: "Vila Garcia", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue Planalto", type: "Açougue", phone: "(15) 3353-2296", address: "Av. 31 de Março, 1055", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Açougue e Mercearia Jd. Bela Vista", type: "Açougue", phone: "(15) 3353-2300", address: "Av. Ambrósio Molina, 571", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
+            
+            // Joalherias existentes
             { name: "Joalheria Diniz", type: "Joalheria", phone: "(15) 3353-1555", address: "R. Antônio Rodrigues Alves, 250 - Loja 3", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Ourivesaria e Joalheria Ouro & Estilo", type: "Joalheria", phone: "(15) 3353-3030", address: "Av. 31 de Março, 523", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Joalheria Prata & Cia", type: "Joalheria", phone: "(15) 3353-2188", address: "R. Antônio Rodrigues Alves, 250 - Loja 1", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Joalheria Real", type: "Joalheria", phone: "(15) 3353-4466", address: "R. Antônio Rodrigues Alves, 250 - Loja 2", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Ourivesaria e Joalheria Votorantim", type: "Joalheria", phone: "(15) 3353-1832", address: "R. Antônio Rodrigues Alves, 250 - Loja 5", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Joalheria Ouro Preto", type: "Joalheria", phone: "(15) 3343-0088", address: "Av. Ambrósio Molina, 355 - Lj 1", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Ourivesaria e Joalheria A Nacional", type: "Joalheria", phone: "(15) 3353-1230", address: "R. Antônio Rodrigues Alves, 250 - Loja 4", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Joalheria Jóias & Cia", type: "Joalheria", phone: "(15) 3246-0068", address: "Av. Ambrósio Molina, 355 - Lj 2", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Ourivesaria São João", type: "Joalheria", phone: "(15) 3353-1580", address: "R. Antônio Rodrigues Alves, 250", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Prata Fina Joalheria", type: "Joalheria", phone: "(15) 98125-9595", address: "Av. Ambrósio Molina, 355 - Lj 3", neighborhood: "Jardim Bela Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
 
+            // Restaurantes de Sorocaba e Votorantim
             { name: "Armazém do João", type: "Restaurante", phone: "(15) 3231-3004", address: "R. Dr. Álvaro Soares, 500", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Cantina di Giovanni", type: "Restaurante", phone: "(15) 3233-1313", address: "Av. Eng. Carlos Reinaldo Mendes, 3040", neighborhood: "Alto da Boa Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Fogão Caipira", type: "Restaurante", phone: "(15) 3228-9086", address: "Av. Itavuvu, 3777", neighborhood: "Parque São Bento", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Outback Steakhouse", type: "Restaurante", phone: "(15) 3336-9400", address: "Av. Prof.ª Izoraida Marques Peres, 401", neighborhood: "Parque Campolim", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Villa Mamma", type: "Restaurante", phone: "(15) 3032-7878", address: "Av. Antônio Carlos Comitre, 2277", neighborhood: "Parque Campolim", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Sushi Yama", type: "Restaurante", phone: "(15) 3211-4242", address: "Av. Afonso Vergueiro, 610", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Pizzaria Donatello", type: "Restaurante", phone: "(15) 3222-5555", address: "Av. Gen. Carneiro, 945", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Bar do Alemão", type: "Restaurante", phone: "(15) 3222-7499", address: "R. Dr. Álvaro Soares, 456", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Restaurante Chapéu de Palha", type: "Restaurante", phone: "(15) 3227-7749", address: "Av. Itavuvu, 10333", neighborhood: "Jardim Santa Bárbara", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Temakeria & Cia", type: "Restaurante", phone: "(15) 3141-3000", address: "Av. Prof.ª Izoraida Marques Peres, 401", neighborhood: "Parque Campolim", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "McDonald's", type: "Restaurante", phone: "(15) 3224-4485", address: "Av. Dr. Eugênio Salerno, 160", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Burger King", type: "Restaurante", phone: "(15) 3226-5833", address: "Av. Afonso Vergueiro, 707", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Subway", type: "Restaurante", phone: "(15) 3231-2711", address: "R. Dr. Álvaro Soares, 296", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Habib's", type: "Restaurante", phone: "(15) 3221-1082", address: "Av. Eng. Carlos Reinaldo Mendes, 2355", neighborhood: "Alto da Boa Vista", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "China in Box", type: "Restaurante", phone: "(15) 3332-0088", address: "Av. Prof.ª Izoraida Marques Peres, 401", neighborhood: "Parque Campolim", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Gendai", type: "Restaurante", phone: "(15) 3332-8080", address: "Av. Antônio Carlos Comitre, 2277", neighborhood: "Parque Campolim", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Ponto Chic", type: "Restaurante", phone: "(15) 3222-5622", address: "R. Dr. Álvaro Soares, 225", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Bar do Urso", type: "Restaurante", phone: "(15) 3019-2480", address: "R. Dr. Armando Pannunzio, 133", neighborhood: "Jardim Vergueiro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Coco Bambu", type: "Restaurante", phone: "(15) 3230-4700", address: "Av. Itavuvu, 13386", neighborhood: "Jardim Santa Rosália", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Fogo de Chão", type: "Restaurante", phone: "(15) 3336-3300", address: "Av. Prof.ª Izoraida Marques Peres, 401", neighborhood: "Parque Campolim", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Churrascaria e Pizzaria Recanto da Carne", type: "Restaurante", phone: "(15) 3243-4244", address: "R. Rio de Janeiro, 71", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Restaurante e Pizzaria Sabor com Arte", type: "Restaurante", phone: "(15) 3243-1685", address: "Av. 31 de Março, 651", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Pizzaria e Esfiharia Vó Olga", type: "Restaurante", phone: "(15) 3243-2880", address: "R. Minas Gerais, 348", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Churrascaria e Pizzaria Rancho da Dika", type: "Restaurante", phone: "(15) 3243-1646", address: "Av. 31 de Março, 801", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Restaurante e Churrascaria Tia Nena", type: "Restaurante", phone: "(15) 3243-3148", address: "Estr. Municipal do Campinho, S/N", neighborhood: "Campinho", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Ponto do Sabor", type: "Restaurante", phone: "(15) 3249-1119", address: "R. Mato Grosso, 166", neighborhood: "Vila Lopez", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Restaurante e Pizzaria Ki Sabor", type: "Restaurante", phone: "(15) 3243-4645", address: "R. Pernambuco, 560", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Pizzaria e Choperia do Gaúcho", type: "Restaurante", phone: "(15) 3243-2727", address: "Av. 31 de Março, 550", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Bar e Restaurante do Paulinho", type: "Restaurante", phone: "(15) 3243-1234", address: "R. São Paulo, 123", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Lanchonete e Restaurante Estrela", type: "Restaurante", phone: "(15) 3243-2225", address: "R. Bahia, 225", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Restaurante e Pizzaria Fornalha", type: "Restaurante", phone: "(15) 3249-1700", address: "Av. 31 de Março, 1100", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Habib's Votorantim", type: "Restaurante", phone: "(15) 3243-5050", address: "Av. 31 de Março, 850", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Subway Votorantim", type: "Restaurante", phone: "(15) 3243-7878", address: "Av. 31 de Março, 720", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "McDonald's Votorantim", type: "Restaurante", phone: "(15) 3243-9000", address: "Av. 31 de Março, 1001", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Pastelândia", type: "Restaurante", phone: "(15) 3243-1818", address: "R. Minas Gerais, 200", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Sushi N' Roll", type: "Restaurante", phone: "(15) 3249-1919", address: "R. Rio de Janeiro, 100", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Restaurante e Churrascaria Boi Dourado", type: "Restaurante", phone: "(15) 3249-2020", address: "Av. 31 de Março, 1500", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Padaria Pão de Açúcar", type: "Restaurante", phone: "(15) 3243-3333", address: "Av. 31 de Março, 600", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
             { name: "Bar do Zé", type: "Restaurante", phone: "(15) 3243-9999", address: "R. Pernambuco, 400", neighborhood: "Centro", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" },
-
-            { name: "Restaurante Sítio do Moinho", type: "Restaurante", phone: "(15) 3249-3000", address: "Estr. do Campinho, Km 5", neighborhood: "Campinho", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" }
+            { name: "Restaurante Sítio do Moinho", type: "Restaurante", phone: "(15) 3249-3000", address: "Estr. do Campinho, Km 5", neighborhood: "Campinho", status: "", etapas: { etapa1: false, etapa2: false, etapa3: false }, observacoes: "" }
         ];
 
         // Funções de gerenciamento de dados
@@ -279,6 +294,7 @@
         }
 
         function updateStatusCounters() {
+            document.getElementById('total-count').textContent = establishments.length;
             document.getElementById('frios-count').textContent = establishments.filter(e => e.status === 'frio').length;
             document.getElementById('mornos-count').textContent = establishments.filter(e => e.status === 'morno').length;
             document.getElementById('quentes-count').textContent = establishments.filter(e => e.status === 'quente').length;
@@ -390,7 +406,7 @@
             window.typeChartInstance = new Chart(typeCtx, {
                 type: 'pie', data: {
                     labels: Object.keys(typeCounts),
-                    datasets: [{ data: Object.values(typeCounts), backgroundColor: ['#FFD700', '#9370DB'] }]
+                    datasets: [{ data: Object.values(typeCounts), backgroundColor: ['#FFD700', '#9370DB', '#3498db'] }]
                 }, options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
             });
             
@@ -457,52 +473,6 @@
             populateTable(filteredData);
         }
 
-        // Função para integração com API do Moskit
-        async function fetchMoskitData() {
-            const apiKey = document.getElementById('apiKey').value.trim();
-            const endpoint = document.getElementById('apiEndpoint').value;
-            const resultDiv = document.getElementById('apiResult');
-            
-            if (!apiKey) {
-                resultDiv.innerHTML = '<div class="error">Por favor, insira sua chave API do Moskit.</div>';
-                return;
-            }
-            
-            resultDiv.innerHTML = '<div class="loading">Carregando dados da API...</div>';
-            
-            try {
-                
-                // Simulando uma resposta da API
-                setTimeout(() => {
-                    const mockData = [
-                        { id: 1, name: "Lead Exemplo 1", value: 1000, stage: "Negotiation" },
-                        { id: 2, name: "Lead Exemplo 2", value: 2500, stage: "Proposal" },
-                        { id: 3, name: "Lead Exemplo 3", value: 500, stage: "Qualification" }
-                    ];
-                    
-                    resultDiv.innerHTML = `
-                        <div class="success">Dados carregados com sucesso! ${mockData.length} registros encontrados.</div>
-                        <table>
-                            <thead><tr><th>ID</th><th>Nome</th><th>Valor</th><th>Estágio</th></tr></thead>
-                            <tbody>
-                                ${mockData.map(item => `
-                                    <tr>
-                                        <td>${item.id}</td>
-                                        <td>${item.name}</td>
-                                        <td>R$ ${item.value.toLocaleString('pt-BR')}</td>
-                                        <td>${item.stage}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
-                }, 1500);
-                
-            } catch (error) {
-                resultDiv.innerHTML = `<div class="error">Erro ao buscar dados: ${error.message}</div>`;
-            }
-        }
-
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             loadFromLocalStorage();
@@ -517,7 +487,6 @@
             });
             
             document.getElementById('closeModal').addEventListener('click', closeDetailsModal);
-            document.getElementById('fetchApiData').addEventListener('click', fetchMoskitData);
             
             window.addEventListener('click', (e) => {
                 if (e.target === document.getElementById('detailsModal')) closeDetailsModal();
