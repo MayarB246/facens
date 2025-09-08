@@ -4,35 +4,159 @@
     <meta charset="UTF-8">
     <title>Tarefa 04</title>
     <style>
-        h3{
+        h4{
             text-align: center;
             background-color: #ffc46b67;
         }
         footer{
             text-align: center;
+            padding-top: 70px;
+        }    
+        table table thead{
+            background-color: gray;
         }
-        img{
-            position:relative;
+        .principal{
+            padding-right: 50px;
+        }
+        #intro{
+            font-weight: bold;
+        }
+        .destaque{
+            background-color: yellow;
+        }
+        table tbody div{
+            background-color: rgb(216, 216, 216);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h3>Aula 04</h3>
+        <h4>Aula 04</h4>
     </header>
 
     <main>
         <table>
             <tbody>
                 <tr>
-                    <td><img id="1" src="assets/pizza.jpeg" alt="pizza img" width="200"><br>
-                    <img id="2" src="assets/parmegiana.jpeg" alt="parmegiana img" width="200"><br>
-                    <img id="3" src="assets/lasagna.jpeg" alt="lasagna img" width="200"></td>
-                </tr>
-                <tr><video src=""></video></tr>
-            </tbody>
-        </table>
+                    <td class="principal">
+                        <img id="1" src="assets/pizza.jpeg" alt="pizza img" width="130"><br>
+                        <img id="2" src="assets/parmegiana.jpeg" alt="parmegiana img" width="130"><br>
+                        <img id="3" src="assets/lasagna.jpeg" alt="lasagna img" width="130">
+                    </td>
+                    <td class="principal">
+                        <video width="300" controls>
+                            <source src="assets/video.mp4" type="video/mp4">
+                        </video>
+                    </td>
+                    <td class="principal">
+                        <audio controls>
+                            <source src="assets/audio1.mp3" type="audio/mp3">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                        <br>
+                        <audio controls>
+                            <source src="assets/audio2.mp3" type="audio/mp3">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </td>
+                    <td class="principal">
+                        <form action="processar.php" method="post">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome"><br><br>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email"><br><br>
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome"><br><br>
+                            <label for="nome">Mensagem:</label><br>
+                            <textarea id="mensagem" name="mensagem" rows="2" cols="15"></textarea><br>
+                            <input type="submit" value="Enviar">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="principal">
+                            <p>Link 1:<a href="#link_falso_1"  alt="link1">Link1</a></p>
+                            <a href="#link_falso_2" alt="link2">
+                                <img src="assets/linkimg.png" alt="Imagem_Link" width="200">
+                            </a>
+                            <p>Link 1:<a href="#link_falso_3" target="_blank" alt="link3">Link3</a></p>
+                        </td>
+                        <td class="principal">
+                            <p><strong>Listas:</strong></p>
+                            <ol>
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                            </ol>
+                            <ul>
+                                <li>Item x</li>
+                                <li>Item x</li>
+                            </ul>
+                        </td>
+                        <td class="principal">
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            <p>Coluna 1</p>
+                                        </td>
+                                        <td>
+                                            <p>Coluna 2</p>
+                                        </td>
+                                        <td>
+                                            <p>Coluna 3</p>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>Linha 1</p>
+                                        </td>
+                                        <td>
+                                            <p>Linha 1</p>
+                                        </td>
+                                        <td>
+                                            <p>Linha 1</p>
+                                        </td>
+                                        <tr>
+                                        <td>
+                                            <p>Linha 2</p>
+                                        </td>
+                                        <td>
+                                            <p>Linha 2</p>
+                                        </td>
+                                        <td>
+                                            <p>Linha 2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Linha 3</p>
+                                        </td>
+                                        <td>
+                                            <p>Linha 3</p>
+                                        </td>
+                                        <td>
+                                            <p>Linha 3</p>
+                                        </td>
+                                    </tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <td class="principal">
+                            <p id="intro">Texto introdutorio</p>
+                            <p class="destaque">Paragrafo 1 com classe destaque</p>
+                            <p class="destaque">Paragrafo 2 com classe destaque</p>
+
+                            <div>
+                                <h3>Div com texto e paragrafo</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut sollicitudin lectus, ut tristique metus.</p>
+                            </div>
+                        </td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
     </main>
 
     <footer>© 2025 – Exemplo didático de HTML da Aula</footer>
