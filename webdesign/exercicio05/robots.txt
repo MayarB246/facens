@@ -1,0 +1,14 @@
+# Permitir todos os mecanismos de busca
+User-agent: *
+Allow: /
+
+# Bloquear pastas e páginas que não precisam aparecer no Google
+Disallow: /admin
+Disallow: /login
+Disallow: /cadastro
+Disallow: /privado
+Disallow: /404
+Disallow: /500
+
+# Sitemap para facilitar a indexação
+Sitemap: https://seusite.vercel.app/sitemap.xml
