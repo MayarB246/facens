@@ -36,7 +36,7 @@ void aloca(float **p, int tam){
 
 void leitura(float *p){
         printf("Digite o valor: ");
-        scanf("%f", p);
+        scanf(" %f", p);
 }
 
 void mostra(float *p, int tam){
