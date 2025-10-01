@@ -8,24 +8,26 @@ struct cliente{
     float saldo;
 };
 
+void aloca(struct cliente **p, int x);
 void cadastro(struct cliente *p);
 int busca(struct cliente *p, int tam);
-void movimenta(struct cliente *p);
+void movimenta(struct cliente *p, int num);
+void mostra(struct cliente *p, int tam);
 
 int main(){
-    struct cliente cli[10], *pcli;
-    int cont = 0, op, pos;
-    pcli = cli;
+    struct cliente *pcli=NULL;
+    int cont = 0, op, pos=0;
 
     do{
         system("cls");
-        printf("Menu:\n\n[1]: Cadastro\n[2]: Deposito\n[3]: Retirada\n[4]: Sair\n");
+        printf("Menu:\n\n[1]: Cadastro\n[2]: Deposito\n[3]: Retirada\n[4]: Listar\n[5]: Sair\n");
         scanf("%i", &op);
         fflush(stdin);
 
         switch (op){
             case 1:
                 if(cont<10){
+                    aloca(&pcli, cont+1);
                     cadastro(pcli+cont);
                     cont++;
                 }
@@ -38,14 +40,18 @@ int main(){
             case 3:
                 pos=busca(pcli,cont);
                 if(pos==-1){
-                    printf("\nCONTA NAO ENCONTRADA\n");
+                    printf("\nCONTA NAO ENCONTRADA!\n");
                 }
                 else{
-                    movimenta(pcli+pos);
+                    movimenta((pcli+pos), op);
                 }
                 break;
 
             case 4:
+                mostra(pcli, cont);
+                break;
+
+            case 5:
                 printf("\n## FINALIZANDO O PROGRAMA ##\n");
                 break;
 
@@ -54,10 +60,17 @@ int main(){
                 break;
             }
             system("pause");
-        }while(op!=4);
+        }while(op!=5);
 
 
     return 0;
+}
+
+void aloca(struct cliente **p, int x){
+    if((*p=(struct cliente*)realloc(*p, x*sizeof(struct cliente)))==NULL){
+        printf("##ERRO NA ALOCACAO##");
+        exit(1);
+    }
 }
 
 void cadastro(struct cliente *p){
@@ -76,19 +89,35 @@ int busca(struct cliente *p, int tam){
     printf("Digite a conta: ");
     scanf("%i", &aux_conta);
     fflush(stdin);
-    for(int i=0;i<tam;i++,p++){
-        if(aux_conta == p->conta){
+    for(int i=0;i<tam;i++){
+        printf("%i\n", (p+i)->conta);
+        if(aux_conta == (p+i)->conta){
             return i;
         }
     }
     return -1;
 }
 
-void movimenta(struct cliente *p){
+void movimenta(struct cliente *p, int num){
     float aux;
-    printf("Nome: %s\nSaldo: %.2f", p->nome, p->saldo);
-    printf("Valor a ser depositado: ");
+    printf("Nome: %s - Saldo: %.2f\n", p->nome, p->saldo);
+    printf("Valor a ser depositado/retirado: ");
     scanf("%f", &aux);
     fflush(stdin);
-    p->saldo+=aux;
+    if(num==2)
+        p->saldo+=aux;
+    else
+        if(p->saldo >= aux){
+            p->saldo-=aux;
+        }
+        else{
+            printf("\nSaldo insuficiente!\n");
+        }
+}
+
+void mostra(struct cliente *p, int tam){
+    for(int i=0;i<tam;i++, p++){
+        printf("\nNome : %s - Saldo : %.2f - Conta : %i", p->nome, p->saldo, p->conta);
+    }
+    printf("\n");
 }
