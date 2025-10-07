@@ -66,7 +66,7 @@ Exemplo de CSS do mascote:
   pointer-events: none;
   z-index: 1000;
   transition: transform 0.1s linear;
-}```
+}````
 Exemplo de hover animado em cards:
 
 ```css
