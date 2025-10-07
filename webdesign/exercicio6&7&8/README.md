@@ -25,7 +25,7 @@ Principais características:
 |-----------------|------------|---------------------------------------------------------------------------|
 | `index.html`    | HTML       | Estrutura completa do site, seções, cursos, login, FAQ, rodapé expandido. |
 | `style.css`     | CSS        | Layout dark, responsivo, animações, hover nos cards e mascote animado.    |
-| `script.js`     | JavaScript | Interatividade, validação de formulários, toggle FAQ e mascote animado.  |
+| `script.js`     | JS         | Interatividade, validação de formulários, toggle FAQ e mascote animado.  |
 
 ---
 
@@ -67,34 +67,45 @@ Exemplo de CSS do mascote:
   z-index: 1000;
   transition: transform 0.1s linear;
 }
+Exemplo de hover animado em cards:
 
----
+css
+Sempre exibir os detalhes
 
-## ⚡ Funcionalidades em JavaScript
+Copiar código
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+Exemplo de fade-in ao rolar a página:
 
-### Principais funções implementadas
+css
+Sempre exibir os detalhes
 
-| Função / Seção                | Descrição                                                                 |
-|--------------------------------|---------------------------------------------------------------------------|
-| Mascote segue o mouse          | Mascote animado acompanha o cursor suavemente.                            |
-| Piscar do mascote              | Piscar leve do mascote a cada 3 segundos.                                 |
-| Scroll suave                   | Rolagem suave ao clicar nos links do menu.                                 |
-| Toggle FAQ                     | Expandir e recolher respostas das perguntas frequentes.                   |
-| Toggle Perguntas Extras        | Perguntas secundárias aparecem apenas após clicar em “Ver mais”.           |
-| Login / Registro               | Validação básica, toggle entre formulários e alert de envio.              |
-| Formulário de Contato          | Validação de campos obrigatórios e alerta ao enviar.                      |
-| Hover animado nos cursos       | Cards de cursos elevam e destacam ao passar o mouse.                      |
-| Fade-in ao rolar a página      | Cards e seções aparecem com animação suave conforme o scroll.             |
-| Destaque de plano profissional | Pulsar leve para chamar atenção ao usuário.                                |
+Copiar código
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
----
+.fade-in.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+🖼️ Hero Section
+Título chamativo: “Aprenda Programação do Zero ao Avançado”
 
-### Exemplos de JS usados
+Subtítulo motivador com CTA “Ver Cursos”
 
-**Mascote seguindo o mouse:**
+Mascote animado segue o mouse
 
-```javascript
-const mascote = document.querySelector(".mascote");
-document.addEventListener("mousemove", e => {
-  mascote.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-});
+Botão CTA com scroll suave até cursos
+
+🏫 Cursos e Como Funciona
+20 cursos disponíveis, incluindo HTML, CSS, JS, Python, React, Node.js, Java, PHP, C++, TypeScript e mais
+
+Cada curso possui ícone, título, descrição e botão de ação
+
+Seção “Como Funciona” explica a metodologia: aulas práticas, projetos, mentorias e certificação
+"""
