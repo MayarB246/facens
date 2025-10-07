@@ -12,7 +12,7 @@ Nosso objetivo é tornar o aprendizado acessível para iniciantes, intermediári
 Principais características:
 
 - Ensinar programação de forma prática e intuitiva  
-- Interface interativa e chamativa com mascote e animações  
+- Interface interativa com mascote e animações  
 - Compatível com desktop, tablets e smartphones  
 - Cursos atualizados com projetos, exercícios e certificações  
 - Área de login/registro e formulários de contato  
@@ -67,3 +67,34 @@ Exemplo de CSS do mascote:
   z-index: 1000;
   transition: transform 0.1s linear;
 }
+
+---
+
+## ⚡ Funcionalidades em JavaScript
+
+### Principais funções implementadas
+
+| Função / Seção                | Descrição                                                                 |
+|--------------------------------|---------------------------------------------------------------------------|
+| Mascote segue o mouse          | Mascote animado acompanha o cursor suavemente.                            |
+| Piscar do mascote              | Piscar leve do mascote a cada 3 segundos.                                 |
+| Scroll suave                   | Rolagem suave ao clicar nos links do menu.                                 |
+| Toggle FAQ                     | Expandir e recolher respostas das perguntas frequentes.                   |
+| Toggle Perguntas Extras        | Perguntas secundárias aparecem apenas após clicar em “Ver mais”.           |
+| Login / Registro               | Validação básica, toggle entre formulários e alert de envio.              |
+| Formulário de Contato          | Validação de campos obrigatórios e alerta ao enviar.                      |
+| Hover animado nos cursos       | Cards de cursos elevam e destacam ao passar o mouse.                      |
+| Fade-in ao rolar a página      | Cards e seções aparecem com animação suave conforme o scroll.             |
+| Destaque de plano profissional | Pulsar leve para chamar atenção ao usuário.                                |
+
+---
+
+### Exemplos de JS usados
+
+**Mascote seguindo o mouse:**
+
+```javascript
+const mascote = document.querySelector(".mascote");
+document.addEventListener("mousemove", e => {
+  mascote.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
