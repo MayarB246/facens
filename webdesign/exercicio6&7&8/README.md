@@ -66,20 +66,20 @@ Exemplo de CSS do mascote:
   pointer-events: none;
   z-index: 1000;
   transition: transform 0.1s linear;
-}
+}```
 Exemplo de hover animado em cards:
 
-css
+```css
 Sempre exibir os detalhes
 
 Copiar código
 .course-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
+}```
 Exemplo de fade-in ao rolar a página:
 
-css
+```css
 Sempre exibir os detalhes
 
 Copiar código
@@ -92,7 +92,7 @@ Copiar código
 .fade-in.appear {
   opacity: 1;
   transform: translateY(0);
-}
+}```
 🖼️ Hero Section
 Título chamativo: “Aprenda Programação do Zero ao Avançado”
 
