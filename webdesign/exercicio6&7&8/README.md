@@ -1,56 +1,69 @@
-# 💻 TechCode Academy - Cursos de Programação
+# 💻 TechCode Academy - Plataforma de Cursos de Programação
 
-Bem-vindo(a) ao projeto **TechCode Academy**, uma plataforma de ensino de programação com visual moderno **dark** e interatividade completa.  
-Este README detalha **todas as funcionalidades implementadas**, incluindo **HTML, CSS e JS**, animações e seções adicionais.
+Bem-vindo(a) à **TechCode Academy**, uma plataforma moderna de ensino de programação, com foco em **interatividade, aprendizado prático e experiência do usuário**.  
+Nosso objetivo é tornar o aprendizado acessível para iniciantes, intermediários e profissionais, oferecendo cursos atualizados em diversas linguagens de programação.
+
+---
+
+## 🌐 Sobre o Site
+
+**TechCode Academy** é uma plataforma educacional online, com visual **dark moderno**, responsividade completa e mascote animado que interage com o usuário.  
+
+Principais características:
+
+- Ensinar programação de forma prática e intuitiva  
+- Interface interativa e chamativa com mascote e animações  
+- Compatível com desktop, tablets e smartphones  
+- Cursos atualizados com projetos, exercícios e certificações  
+- Área de login/registro e formulários de contato  
 
 ---
 
 ## 🗂 Estrutura do Projeto
 
-O projeto é composto por três arquivos principais:
-
 | Arquivo         | Tipo        | Descrição                                                                 |
 |-----------------|------------|---------------------------------------------------------------------------|
-| `index.html`    | HTML       | Estrutura da página, seções, cursos, login, FAQ e rodapé expandido.      |
-| `style.css`     | CSS        | Estilo dark, layout responsivo, animações, mascote e interações visuais. |
-| `script.js`     | JavaScript | Interações, animações, validações de formulários e mascote animado.      |
+| `index.html`    | HTML       | Estrutura completa do site, seções, cursos, login, FAQ, rodapé expandido. |
+| `style.css`     | CSS        | Layout dark, responsivo, animações, hover nos cards e mascote animado.    |
+| `script.js`     | JavaScript | Interatividade, validação de formulários, toggle FAQ e mascote animado.  |
 
 ---
 
-## 📌 Seções da Página
+## 🏗️ Estrutura do HTML
+
+O site é dividido em seções:
 
 | Seção                     | Descrição                                                                 |
 |----------------------------|---------------------------------------------------------------------------|
-| **Hero**                  | Apresenta a plataforma, com mascote animado, texto chamativo e botão.    |
-| **Cursos**                | Lista de 20 cursos com imagens, títulos e botões de ação.                |
-| **Como Funciona**         | Explicação de metodologia e funcionamento da plataforma.                 |
-| **Empresa**               | Informações sobre a empresa, missão, visão e equipe.                     |
-| **Planos de Estudo**      | Diferentes planos de assinatura com destaques e benefícios.              |
-| **Login / Registro**      | Área de usuário para login e registro com validação em JS.               |
-| **FAQ**                   | Perguntas frequentes com toggle de respostas animadas.                   |
-| **Contato**               | Formulário de contato com validação e alerta ao enviar.                  |
-| **Rodapé Expandido**       | Links, informações de contato e redes sociais, com estilo dark.          |
+| Hero                       | Introdução chamativa com mascote e botão CTA.                             |
+| Cursos                     | Lista de 20 cursos com ícones, títulos, descrições e botões.             |
+| Como Funciona              | Explicação da metodologia da plataforma e funcionamento.                 |
+| Empresa                    | Missão, visão, equipe e valores da TechCode Academy.                     |
+| Planos de Estudo           | Planos de assinatura com destaques e benefícios.                          |
+| Login / Registro           | Área de usuário com toggle entre login e registro e validação JS.         |
+| FAQ                        | Perguntas frequentes com toggle animado e respostas ocultas.              |
+| Contato                    | Formulário funcional com validação JS e alerta de envio.                  |
+| Rodapé Expandido           | Contato, links rápidos, redes sociais e informações legais.               |
 
 ---
 
 ## 🎨 CSS e Layout
 
-O CSS foi desenvolvido para **visual dark moderno**, responsivo, com **Flexbox e Grid**. Principais características:
+O CSS é voltado para **design moderno e dark**, com responsividade e animações:
 
-- **Hero Section** com mascote animado
-- **Cursos em grid responsivo**  
-- **Login e Registro** estilizados, card centralizado  
-- **FAQ toggle** com animação de abrir e fechar  
-- **Rodapé expandido** com 4 colunas de informação  
-- **Mascote animado** segue o mouse suavemente  
+- Dark mode elegante  
+- Flexbox e Grid para cards de cursos e seções  
+- Cards animados com hover e transições suaves  
+- Hero chamativo com botão CTA e mascote animado  
+- Rodapé expandido com quatro colunas e formulário adicional  
 
-Exemplo de classe:
+Exemplo de CSS do mascote:
 
 ```css
 .mascote {
-  position: fixed;          
-  width: 60px;              
-  pointer-events: none;     
-  z-index: 1000;            
+  position: fixed;
+  width: 60px;
+  pointer-events: none;
+  z-index: 1000;
   transition: transform 0.1s linear;
 }
