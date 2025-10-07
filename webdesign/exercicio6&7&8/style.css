@@ -1,0 +1,680 @@
+/* ==========================
+   RESET E BASE
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==========================
+   CABEÇALHO
+========================== */
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1f1f1f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  z-index: 1000;
+  border-bottom: 1px solid #333;
+}
+
+.logo span {
+  color: #4fc3f7;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar li a {
+  color: #f0f0f0;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar li a:hover {
+  color: #4fc3f7;
+}
+
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-btn span {
+  width: 25px;
+  height: 3px;
+  background-color: #f0f0f0;
+  display: block;
+}
+
+/* ==========================
+   HERO SECTION
+========================== */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.hero-content h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #4fc3f7;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+.btn-primary {
+  background-color: #4fc3f7;
+  color: #121212;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #29b6f6;
+}
+
+/* ==========================
+   ILUSTRAÇÕES
+========================== */
+.illustrations-section {
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  background-color: #181818;
+}
+
+.illustrations-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.illustrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.illustration {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  transition: 0.3s;
+  text-align: center;
+  border: 1px solid #333;
+}
+
+.illustration:hover {
+  transform: translateY(-10px);
+  border-color: #4fc3f7;
+}
+
+.illustration img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.illustration h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.illustration p {
+  color: #ccc;
+}
+
+/* ==========================
+   GRID DE CURSOS
+========================== */
+.courses-section {
+  padding: 6rem 2rem 4rem;
+  background-color: #121212;
+  text-align: center;
+}
+
+.courses-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.course-card {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #333;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  border-color: #4fc3f7;
+}
+
+.course-card img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+}
+
+.course-card h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.course-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.course-card ul {
+  text-align: left;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  color: #bbb;
+}
+
+.course-card ul li {
+  margin-bottom: 0.5rem;
+}
+
+.btn-secondary {
+  background-color: #333;
+  color: #4fc3f7;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border: 1px solid #4fc3f7;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #4fc3f7;
+  color: #121212;
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 1024px) {
+  .navbar ul {
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #1f1f1f;
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 250px;
+    padding: 2rem;
+    transition: 0.3s;
+    height: calc(100% - 70px);
+  }
+
+  .navbar ul.active {
+    right: 0;
+  }
+
+  .menu-btn {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .illustration img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .course-card img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ==========================
+   CURSOS EXTENDIDOS
+========================== */
+.courses-section-extended {
+  padding: 6rem 2rem 4rem;
+  background-color: #141414;
+  text-align: center;
+}
+
+.courses-section-extended h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.courses-grid-extended {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.course-card {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  border-color: #4fc3f7;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.course-card img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+}
+
+.course-card h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.course-card p, .course-card ul li {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.btn-secondary {
+  background-color: #333;
+  color: #4fc3f7;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border: 1px solid #4fc3f7;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #4fc3f7;
+  color: #121212;
+}
+
+/* ==========================
+   COMO FUNCIONA
+========================== */
+.how-it-works {
+  background-color: #121212;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 2.5rem;
+  color: #4fc3f7;
+  margin-bottom: 3rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.step img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.step h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.step p {
+  color: #ccc;
+}
+
+/* ==========================
+   A EMPRESA
+========================== */
+.company {
+  background-color: #141414;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.company h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.company-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.company-content h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.company-content p, .company-content ul li {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.company-content ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================
+   ESTATÍSTICAS
+========================== */
+.stats-section {
+  background-color: #121212;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.stats-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat h3 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.stat p {
+  color: #ccc;
+}
+
+/* ==========================
+   BLOG RESUMIDO
+========================== */
+.blog-section {
+  background-color: #141414;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.blog-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-card {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.blog-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.blog-card h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.blog-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.blog-card a.btn-secondary {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+/* ==========================
+   LOGIN / REGISTRO
+========================== */
+.login-section {
+  background-color: #121212;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.login-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.login-card, .register-card {
+  background-color: #1f1f1f;
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  width: 300px;
+  transition: all 0.3s ease;
+}
+
+.login-card h3, .register-card h3 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.login-card form input, .register-card form input {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #121212;
+  color: #fff;
+}
+
+.login-card p, .register-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.login-card span, .register-card span {
+  color: #4fc3f7;
+  cursor: pointer;
+}
+
+/* ==========================
+   FAQ
+========================== */
+.faq-section {
+  background-color: #141414;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.faq-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4fc3f7;
+}
+
+.faq-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.faq-item {
+  background-color: #1f1f1f;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.faq-question {
+  color: #fff;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.faq-answer {
+  color: #ccc;
+  margin-top: 0.5rem;
+  display: none;
+  font-size: 0.95rem;
+}
+
+/* ==========================
+   RODAPÉ EXPANDIDO
+========================== */
+.footer-expanded {
+  background-color: #121212;
+  color: #ccc;
+  padding: 6rem 2rem 3rem;
+}
+
+.footer-expanded h2 {
+  color: #4fc3f7;
+  margin-bottom: 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.footer-content ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* ==========================
+   MASCOTE SUAVE SEGUINDO O MOUSE
+========================== */
+.mascote {
+  position: fixed;          /* fixo para seguir o viewport */
+  width: 60px;              /* menor tamanho */
+  pointer-events: none;     /* não atrapalha cliques */
+  z-index: 1000;            /* acima de outros elementos */
+  transition: transform 0.1s linear; /* movimento suave */
+}
+
+.mascote img {
+  width: 100%;
+  height: auto;
+}

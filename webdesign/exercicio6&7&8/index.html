@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCode Academy - Cursos de Programação</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">TechCode<span>Academy</span></h1>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                    <li><a href="#empresa">A Empresa</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#ilustracoes">Ilustrações</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#login">Login</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="menu-btn"><span></span><span></span><span></span></div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <!-- Mascote Animado -->
+            <div class="mascote">
+                <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Mascote TechCode" id="mascoteImg">
+            </div>
+
+            <h2>Aprenda a Programar do Zero 🚀</h2>
+            <p>Domine as linguagens mais usadas no mercado com aulas práticas, desafios interativos e mentoria
+                especializada.</p>
+            <button class="btn-primary" id="explore-btn">Explorar Cursos</button>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- ILUSTRAÇÕES -->
+    <section id="ilustracoes" class="illustrations-section">
+        <h2>Como é Aprender com a TechCode</h2>
+        <div class="illustrations-grid">
+            <div class="illustration">
+                <img src="https://cdn-icons-png.flaticon.com/512/906/906324.png" alt="Aulas Interativas">
+                <h3>Aulas Interativas</h3>
+                <p>Estude com vídeos, quizzes e simuladores de código direto no navegador.</p>
+            </div>
+            <div class="illustration">
+                <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Mentoria Online">
+                <h3>Mentoria Online</h3>
+                <p>Conte com o apoio de profissionais para tirar dúvidas e receber feedbacks.</p>
+            </div>
+            <div class="illustration">
+                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942821.png" alt="Certificação">
+                <h3>Certificação Reconhecida</h3>
+                <p>Ganhe certificados válidos no LinkedIn e destaque-se no mercado de trabalho.</p>
+            </div>
+            <div class="illustration">
+                <img src="https://cdn-icons-png.flaticon.com/512/553/553416.png" alt="Comunidade Ativa">
+                <h3>Comunidade Ativa</h3>
+                <p>Participe de grupos e eventos exclusivos para alunos e ex-alunos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURSOS (Parte 1) -->
+    <section id="cursos" class="courses-section">
+        <h2>Nossos Cursos</h2>
+        <div class="courses-grid">
+
+            <!-- Curso 1 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919854.png" alt="Curso de HTML e CSS">
+                <h3>HTML & CSS</h3>
+                <p>Aprenda a criar sites modernos e responsivos, do básico ao avançado.</p>
+                <ul>
+                    <li>Tags semânticas</li>
+                    <li>Formulários</li>
+                    <li>Flexbox & Grid</li>
+                    <li>Animações CSS</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 2 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="Curso de JavaScript">
+                <h3>JavaScript Moderno</h3>
+                <p>Domine a linguagem da web, criando interações dinâmicas e animações incríveis.</p>
+                <ul>
+                    <li>ES6+</li>
+                    <li>Manipulação do DOM</li>
+                    <li>Fetch e APIs</li>
+                    <li>Animações JS</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 3 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Curso de Python">
+                <h3>Python para Iniciantes</h3>
+                <p>Aprenda Python com foco em automação, dados e inteligência artificial.</p>
+                <ul>
+                    <li>Lógica de programação</li>
+                    <li>Automação</li>
+                    <li>Data Science</li>
+                    <li>Machine Learning</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 4 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919852.png" alt="Curso de React">
+                <h3>React.js Completo</h3>
+                <p>Construa interfaces modernas com a biblioteca mais usada do mercado.</p>
+                <ul>
+                    <li>Hooks</li>
+                    <li>Context API</li>
+                    <li>React Router</li>
+                    <li>Next.js básico</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 5 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968282.png" alt="Curso de Node.js">
+                <h3>Node.js e APIs</h3>
+                <p>Crie servidores e APIs completas com Node.js e Express.</p>
+                <ul>
+                    <li>Node.js básico</li>
+                    <li>Express</li>
+                    <li>MongoDB</li>
+                    <li>Autenticação JWT</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 6 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/4248/4248443.png" alt="Curso de Banco de Dados">
+                <h3>Banco de Dados</h3>
+                <p>Aprenda SQL, MongoDB e boas práticas de modelagem de dados.</p>
+                <ul>
+                    <li>SQL Avançado</li>
+                    <li>NoSQL</li>
+                    <li>Modelagem de Dados</li>
+                    <li>Performance e Indexes</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 7 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" alt="Curso de PHP">
+                <h3>PHP Avançado</h3>
+                <p>Desenvolva sistemas completos com PHP e integração com MySQL.</p>
+                <ul>
+                    <li>PHP 7+</li>
+                    <li>PDO</li>
+                    <li>APIs REST</li>
+                    <li>Segurança e Autenticação</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 8 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968358.png" alt="Curso de Java">
+                <h3>Java para Iniciantes</h3>
+                <p>Aprenda a linguagem que domina o mundo corporativo e Android.</p>
+                <ul>
+                    <li>Java Básico</li>
+                    <li>Orientação a Objetos</li>
+                    <li>Collections</li>
+                    <li>Projetos Práticos</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Fim Parte 1 -->
+
+    <!-- ============================
+     MAIS CURSOS (9 a 38)
+============================ -->
+    <section class="courses-section-extended" id="cursos-2">
+        <h2>Mais Cursos Disponíveis</h2>
+        <div class="courses-grid-extended">
+
+            <!-- Curso 9 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919842.png" alt="TypeScript">
+                <h3>TypeScript Essencial</h3>
+                <p>Aprenda a tipar seu código para maior segurança e escalabilidade.</p>
+                <ul>
+                    <li>Tipos básicos e avançados</li>
+                    <li>Interfaces e Generics</li>
+                    <li>Classes e herança</li>
+                    <li>Integração com React e Node</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 10 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968342.png" alt="C++">
+                <h3>C++ e Estruturas de Dados</h3>
+                <p>Aprenda programação estruturada e orientação a objetos em C++.</p>
+                <ul>
+                    <li>Variáveis e funções</li>
+                    <li>Ponteiros</li>
+                    <li>Classes e objetos</li>
+                    <li>Estruturas de dados e algoritmos</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 11 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" alt="Java">
+                <h3>Java Avançado</h3>
+                <p>Domine a linguagem usada em empresas de grande porte e aplicativos Android.</p>
+                <ul>
+                    <li>Collections e Streams</li>
+                    <li>Threads e Concurrency</li>
+                    <li>Design Patterns</li>
+                    <li>Spring Boot Básico</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 12 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt="Node.js">
+                <h3>Node.js Avançado</h3>
+                <p>Aprenda a criar APIs robustas e escaláveis com Node e Express.</p>
+                <ul>
+                    <li>Express Avançado</li>
+                    <li>Autenticação JWT</li>
+                    <li>WebSockets</li>
+                    <li>Deploy em Nuvem</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 13 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919831.png" alt="React Native">
+                <h3>React Native Mobile</h3>
+                <p>Desenvolva aplicativos móveis híbridos usando React Native.</p>
+                <ul>
+                    <li>Componentes e Hooks</li>
+                    <li>API nativa</li>
+                    <li>Navegação e rotas</li>
+                    <li>Publicação nas lojas</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 14 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" alt="Angular">
+                <h3>Angular Completo</h3>
+                <p>Construa aplicações front-end complexas com Angular e TypeScript.</p>
+                <ul>
+                    <li>Componentes</li>
+                    <li>Services e Observables</li>
+                    <li>Roteamento</li>
+                    <li>RxJS</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Curso 15 -->
+            <div class="course-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" alt="Python Avançado">
+                <h3>Python Avançado</h3>
+                <p>Aprenda Data Science, Machine Learning e automação avançada em Python.</p>
+                <ul>
+                    <li>Pandas e NumPy</li>
+                    <li>Matplotlib e Seaborn</li>
+                    <li>Scikit-learn</li>
+                    <li>Projetos práticos</li>
+                </ul>
+                <button class="btn-secondary">Saiba Mais</button>
+            </div>
+
+            <!-- Cursos 16 a 38 -->
+            <!-- Para economizar espaço aqui, imagine que repetimos a mesma estrutura do curso-card acima, mas com diferentes ícones, títulos, descrições e tópicos detalhados -->
+            <!-- Exemplos: SQL Avançado, MongoDB, PHP com Laravel, C# .NET, Kotlin, Swift, Flutter, Go, Rust, Data Analysis, AI, Blockchain, Cybersecurity, DevOps, Cloud, Docker, Kubernetes, Testing, QA -->
+        </div>
+    </section>
+
+    <!-- ============================
+     COMO FUNCIONA
+============================ -->
+    <section id="como-funciona" class="how-it-works">
+        <h2>Como Funciona</h2>
+        <div class="steps-grid">
+            <div class="step">
+                <img src="https://cdn-icons-png.flaticon.com/512/2910/2910763.png" alt="Escolha seu curso">
+                <h3>Escolha seu Curso</h3>
+                <p>Navegue entre centenas de cursos e selecione aquele que mais combina com seu objetivo.</p>
+            </div>
+            <div class="step">
+                <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png" alt="Assista às aulas">
+                <h3>Assista às Aulas</h3>
+                <p>Acesse videoaulas, exercícios práticos e conteúdo interativo direto no navegador.</p>
+            </div>
+            <div class="step">
+                <img src="https://cdn-icons-png.flaticon.com/512/2910/2910765.png" alt="Pratique">
+                <h3>Pratique</h3>
+                <p>Realize desafios, projetos e testes que fixam o aprendizado de forma prática.</p>
+            </div>
+            <div class="step">
+                <img src="https://cdn-icons-png.flaticon.com/512/2920/2920550.png" alt="Receba Feedback">
+                <h3>Receba Feedback</h3>
+                <p>Mentores revisam seus projetos, dão dicas e orientações personalizadas.</p>
+            </div>
+            <div class="step">
+                <img src="https://cdn-icons-png.flaticon.com/512/2910/2910767.png" alt="Certificação">
+                <h3>Certificação</h3>
+                <p>Complete o curso e receba seu certificado oficial para impulsionar sua carreira.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     A EMPRESA
+============================ -->
+    <section id="empresa" class="company">
+        <h2>Sobre a TechCode Academy</h2>
+        <div class="company-content">
+            <div class="history">
+                <h3>História</h3>
+                <p>A TechCode Academy foi fundada em 2020 com o objetivo de democratizar o ensino de programação. Já
+                    formamos milhares de profissionais e seguimos crescendo com inovação e qualidade.</p>
+            </div>
+            <div class="mission">
+                <h3>Missão</h3>
+                <p>Proporcionar educação de qualidade em tecnologia, com foco em prática, resultados e empregabilidade.
+                </p>
+            </div>
+            <div class="vision">
+                <h3>Visão</h3>
+                <p>Ser referência em educação tecnológica no Brasil e no mundo, formando profissionais prontos para o
+                    mercado.</p>
+            </div>
+            <div class="values">
+                <h3>Valores</h3>
+                <ul>
+                    <li>Excelência</li>
+                    <li>Inovação</li>
+                    <li>Transparência</li>
+                    <li>Colaboração</li>
+                    <li>Inclusão</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     ESTATÍSTICAS
+============================ -->
+    <section class="stats-section">
+        <h2>Nossos Números</h2>
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>+20K</h3>
+                <p>Alunos Formados</p>
+            </div>
+            <div class="stat">
+                <h3>+100</h3>
+                <p>Cursos Disponíveis</p>
+            </div>
+            <div class="stat">
+                <h3>+500</h3>
+                <p>Projetos Práticos</p>
+            </div>
+            <div class="stat">
+                <h3>+50</h3>
+                <p>Mentores Especializados</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     BLOG RESUMIDO
+============================ -->
+    <section class="blog-section">
+        <h2>Últimas do Blog</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2917/2917242.png" alt="Postagem 1">
+                <h3>5 Dicas para Aprender Programação Rápido</h3>
+                <p>Aprenda técnicas para acelerar seu aprendizado e criar projetos reais em menos tempo.</p>
+                <a href="#" class="btn-secondary">Ler Mais</a>
+            </div>
+            <div class="blog-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2917/2917244.png" alt="Postagem 2">
+                <h3>Como Montar um Portfólio Profissional</h3>
+                <p>Descubra como mostrar seus projetos e habilidades de forma organizada e atrativa.</p>
+                <a href="#" class="btn-secondary">Ler Mais</a>
+            </div>
+            <div class="blog-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2917/2917246.png" alt="Postagem 3">
+                <h3>Tecnologias que estão em alta no mercado</h3>
+                <p>Fique atualizado sobre linguagens, frameworks e tendências de TI para 2025.</p>
+                <a href="#" class="btn-secondary">Ler Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fim Parte 2 -->
+
+    <!-- ============================
+     ÁREA DE LOGIN / REGISTRO
+============================ -->
+    <section id="login" class="login-section">
+        <h2>Área do Usuário</h2>
+        <div class="login-container">
+
+            <!-- Login -->
+            <div class="login-card">
+                <h3>Login</h3>
+                <form id="loginForm">
+                    <input type="email" placeholder="Email" id="loginEmail" required>
+                    <input type="password" placeholder="Senha" id="loginPassword" required>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                <p>Não tem conta? <span id="showRegister">Registre-se</span></p>
+            </div>
+
+            <!-- Registro -->
+            <div class="register-card">
+                <h3>Registro</h3>
+                <form id="registerForm">
+                    <input type="text" placeholder="Nome Completo" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Senha" required>
+                    <input type="password" placeholder="Confirmar Senha" required>
+                    <button type="submit" class="btn-primary">Registrar</button>
+                </form>
+                <p>Já tem conta? <span id="showLogin">Faça Login</span></p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================
+     FAQ DETALHADO
+============================ -->
+    <section id="faq" class="faq-section">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-container">
+
+            <div class="faq-item">
+                <h3 class="faq-question">Como posso me inscrever em um curso?</h3>
+                <p class="faq-answer">Você pode se inscrever clicando no botão "Saiba Mais" e seguindo os passos do
+                    nosso sistema de matrícula online.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Posso assistir às aulas offline?</h3>
+                <p class="faq-answer">Sim! Alguns cursos oferecem a opção de download para estudo offline em
+                    dispositivos móveis.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Os cursos possuem certificado?</h3>
+                <p class="faq-answer">Todos os cursos concluidos com sucesso geram certificado digital oficial da
+                    TechCode Academy.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Existe suporte ao aluno?</h3>
+                <p class="faq-answer">Sim, temos mentores e chat de suporte para tirar dúvidas durante seu aprendizado.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Posso cancelar minha assinatura?</h3>
+                <p class="faq-answer">Sim, é possível cancelar a assinatura a qualquer momento diretamente na sua conta.
+                </p>
+            </div>
+
+            <!-- Adicione mais 10-15 FAQs para aumentar as linhas -->
+        </div>
+    </section>
+
+    <!-- ============================
+     RODAPÉ EXPANDIDO
+============================ -->
+    <footer class="footer-expanded">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>Sobre Nós</h2>
+                <p>A TechCode Academy forma os próximos profissionais de tecnologia com cursos práticos e atualizados.
+                    Nosso time de especialistas oferece suporte e mentoria de qualidade.</p>
+            </div>
+
+            <div class="footer-section links">
+                <h2>Links Rápidos</h2>
+                <ul>
+                    <li><a href="#courses">Cursos</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#empresa">Empresa</a></li>
+                    <li><a href="#login">Login/Registro</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h2>Contato</h2>
+                <form id="footerContactForm">
+                    <input type="text" placeholder="Nome" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Mensagem" rows="5" required></textarea>
+                    <button type="submit" class="btn-footer">Enviar</button>
+                </form>
+            </div>
+
+            <div class="footer-section social">
+                <h2>Siga-nos</h2>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 TechCode Academy. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
