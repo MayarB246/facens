@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoWin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header role="banner">
+    <h1 id="title">EcoWin</h1>
+    <p>Transforme lixo reciclado em recompensas sustentáveis!</p>
+  </header>
+
+  <main role="main">
+    <section id="user-section" aria-labelledby="user-heading">
+      <h2 id="user-heading">Seu Progresso</h2>
+      <p>
+        Você possui
+        <span id="lishoo-count" aria-live="polite">0</span>
+        moedas Lishoo 💰
+      </p>
+      <button id="add-coins-btn" aria-label="Adicionar lixo reciclado">
+        Adicionar Lixo Reciclado
+      </button>
+    </section>
+
+    <section id="rewards-section" aria-labelledby="rewards-heading">
+      <h2 id="rewards-heading">Prêmios Disponíveis</h2>
+      <div class="reward-list" role="list">
+        <!-- Prêmios renderizados via JavaScript -->
+      </div>
+    </section>
+
+    <section
+      id="reward-details"
+      class="hidden"
+      aria-labelledby="details-heading"
+      aria-hidden="true"
+    >
+      <h2 id="details-heading">Detalhes do Prêmio</h2>
+      <div
+        id="images-container"
+        role="group"
+        aria-label="Imagens do prêmio selecionado"
+      ></div>
+      <p id="reward-description"></p>
+      <p id="reward-cost"></p>
+      <button id="collect-btn" aria-label="Resgatar este prêmio">
+        Resgatar Prêmio
+      </button>
+      <button id="close-details-btn" aria-label="Fechar detalhes do prêmio">
+        Fechar
+      </button>
+    </section>
+
+    <div
+      id="animation-container"
+      class="hidden"
+      aria-hidden="true"
+      role="presentation"
+    >
+      <img
+        id="animation-img"
+        src=""
+        alt="Animação do planeta Terra entregando recompensa"
+      />
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <p>♻️ Recicle para um futuro melhor!</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
