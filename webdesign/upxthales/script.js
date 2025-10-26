@@ -24,7 +24,7 @@ const rewards = [
     images: ["assets/a1.jpeg", "assets/a2.jpeg", "assets/a3.jpeg"]
   },
   {
-    name: "Garrafa Reutilizável",
+    name: "Garrafa térmica reciclada",
     cost: 30,
     description: "Capacidade de 750ml. Feita com aluminio reciclado. Cor: verde, laranja ou branca. Valor estimado: R$ 45.",
     images: ["assets/Garrafa 1.jpeg", "assets/Garrafa 2.jpeg", "assets/Garrafa 3.jpeg"]
@@ -78,8 +78,13 @@ function renderRewards() {
   rewards.forEach((reward, index) => {
     const card = document.createElement("div");
     card.className = "reward-card";
+
+    // Imagem principal do prêmio (primeira do array)
+    const imageHTML = `<img src="${reward.images[0]}" alt="${reward.name}" class="reward-thumbnail" />`;
+
     card.innerHTML = `
       <h3>${reward.name}</h3>
+      ${imageHTML}
       <p>Custa ${reward.cost} lishoos</p>
       <p>Coletado: ${userInventory[reward.name]}/2</p>
     `;
@@ -87,6 +92,7 @@ function renderRewards() {
     rewardListContainer.appendChild(card);
   });
 }
+
 
 // === EXIBE DETALHES DO PRÊMIO EM TELA CHEIA ===
 function showRewardDetails(index) {
