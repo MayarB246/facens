@@ -1,1 +1,1 @@
-printf("\nPENIS");
+scanf
