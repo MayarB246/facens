@@ -1,10 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 
 app = FastAPI()
 
-# Lista que funcionará como nosso "banco de dados" temporário
+# Permite que o seu arquivo index.html converse com o servidor
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# A nossa lista na MEMÓRIA RAM (O novo "banco de dados")
 historico_dados = []
 
 class DadosChuveiro(BaseModel):
@@ -17,17 +27,17 @@ class DadosChuveiro(BaseModel):
 async def receber_dados(dados: DadosChuveiro):
     global historico_dados
     
-    # Adiciona o novo dado no final da lista
-    historico_dados.append(dados.dict())
+    # model_dump substitui o antigo .dict()
+    historico_dados.append(dados.model_dump())
     
-    # Se a lista tiver mais de 50 itens, remove o primeiro (o mais antigo)
     if len(historico_dados) > 50:
         historico_dados.pop(0)
     
+    # ESTE é o comando que faz o texto aparecer no terminal
     print(f"📥 Dados recebidos! Total no histórico: {len(historico_dados)}")
     return {"status": "sucesso"}
 
 @app.get("/")
 async def mostrar_historico():
-    # Agora, ao acessar a raiz, você vê a lista com os últimos 50 dados
-    return historico_dados
+    # O [::-1] inverte a lista: o dado mais recente aparece no TOPO
+    return historico_dados[::-1]

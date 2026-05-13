@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShowerTech Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #09090b;
+            --card-bg: #18181b;
+            --primary: #3b82f6;
+            --text: #fafafa;
+            --text-muted: #a1a1aa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 { font-size: 24px; margin-bottom: 30px; }
+
+        /* Grid de Cards */
+        .grid-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #27272a;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Gráfico */
+        .chart-container {
+            background: var(--card-bg);
+            border: 1px solid #27272a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* Tabela */
+        .table-container {
+            background: var(--card-bg);
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #27272a;
+            color: var(--text-muted);
+            text-align: left;
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 12px;
+            border-top: 1px solid #27272a;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Banho Inteligente <span style="color: var(--primary)">ShowerTech</span></h1>
+
+    <!-- Cards de Resumo -->
+    <div class="grid-stats">
+        <div class="card">
+            <div class="card-header">Consumo Total <i data-lucide="droplets"></i></div>
+            <div class="card-value" id="val-litros">0.00 L</div>
+        </div>
+        <div class="card">
+            <div class="card-header">Tempo de Banho <i data-lucide="clock"></i></div>
+            <div class="card-value" id="val-tempo">0s</div>
+        </div>
+        <div class="card">
+            <div class="card-header">Energia Gasta <i data-lucide="zap"></i></div>
+            <div class="card-value" id="val-energia">0.000 kWh</div>
+        </div>
+        <div class="card">
+            <div class="card-header">Custo Estimado <i data-lucide="dollar-sign"></i></div>
+            <div class="card-value" id="val-custo">R$ 0.00</div>
+        </div>
+    </div>
+
+    <!-- Gráfico de Consumo -->
+    <div class="chart-container">
+        <h3 style="margin-top: 0">Fluxo de Consumo em Tempo Real</h3>
+        <canvas id="meuGrafico" height="100"></canvas>
+    </div>
+
+    <!-- Tabela de Histórico -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>TEMPO</th>
+                    <th>CONSUMO (L)</th>
+                    <th>CUSTO</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-corpo">
+                <!-- Injetado via JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>
