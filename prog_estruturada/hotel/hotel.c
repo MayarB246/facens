@@ -102,7 +102,6 @@ int verificaq(){
         fseek(fptr,0,2);
         x = ftell(fptr)/sizeof(quarto);
         fclose(fptr);
-        return x;
     }
     else{
         printf("\nErro na verificacao de quarto");
@@ -155,6 +154,7 @@ void mostraq(quarto *pq){
 
 void mostrah(hospede *ph){
     FILE *fptr=NULL;
+
     int q=verificah();
 
     if((fptr=fopen("hospedes.bin", "rb"))!=NULL && q != 0){
