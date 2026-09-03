@@ -1,0 +1,95 @@
+public static void aula2_ex2(){
+    Scanner in = new Scanner(System.in);
+    String genero;
+    float peso, altura;
+
+    System.out.println("Digite o seu genero: ");
+    genero = in.next();
+}
+
+
+public static void aula02_ex1(){
+    float a, b, c;
+    
+    Scanner in = new Scanner(System.in);
+
+    System.out.println("Digite o primeiro valor: ");
+    a = in.nextFloat();
+    System.out.println("Digite o segundo valor: ");
+    b = in.nextFloat();
+    System.out.println("Digite o terceiro valor: ");
+    c = in.nextFloat();
+
+    if (a > b+c) {
+        System.out.println("O numero " + a + " eh maior do que a soma dos outros dois");
+    }
+    else{
+        System.out.println("O numero " + a + " eh menor do que a soma dos outros dois");
+    }
+}
+
+
+public static void aula01(){
+    int idade;
+    float salario;
+    String nome;
+    boolean opcao;
+    Scanner entrada = new Scanner(System.in);
+
+    System.out.println("Digite seu nome: ");
+    nome = entrada.next();
+    System.out.println("Digite sua idade: ");
+    idade = entrada.nextInt();
+
+    System.out.println("Nome = " + nome);
+    System.out.println("Idade = " + idade);
+}
+
+
+aula 3:
+import java.util.*;
+public class pessoa {
+    private String nome;
+    private int idade;
+
+    Scanner leia = new Scanner(System.in);
+
+    public void imprimirNome(){
+        System.out.println("Nome: " + nome);
+    }
+    public void imprimirIdade(){
+        System.out.println("Idade: " + idade);
+    }
+    public void setNome(){
+        System.out.println("Digite seu nome: ");
+        this.nome = leia.next();
+    }
+    public void setIdade(){
+        System.out.println("Digite sua idade: ");
+        this.idade = leia.nextInt();
+    }
+    public void imprimirDados(){
+        System.out.println("Nome da 1 pessoa: " + nome + "\nIdade: "+ idade);
+    }
+    
+}
+
+public class app {
+    public static void main(String[] args) {
+
+        pessoa p = new pessoa();
+        //p.nome = "Luciano";
+        //p.idade = 35;
+
+        p.setNome();
+        p.setIdade();
+
+        /*
+        pessoa p2 = new pessoa();
+        p2.setNome();
+        p2.setIdade(23);
+        */
+
+        p.imprimirDados();
+    }
+}

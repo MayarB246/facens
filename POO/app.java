@@ -1,13 +1,8 @@
-import java.util.*;
-public class app {
-    public static void main(String[] args) {
-        int idade;
-        float salario;
-        String nome;
-        boolean opcao;
-        Scanner entrada = new Scanner(System.in);
-
-        nome = "Jose";
-        System.out.println("Nome: = " + nome);
+public class app{
+    public static void main(String[] args){
+        calcul cal = new calcul();
+        int op = cal.opcao();
+        float res = cal.calcular(op);
+        cal.finalizar(res);
     }
 }
